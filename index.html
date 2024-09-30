@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		/>
+		<link
+			rel="stylesheet"
+			href="style.css"
+		/>
+		<!-- ICON PACK -->
+		<script
+			src="https://kit.fontawesome.com/d9192ce5f6.js"
+			crossorigin="anonymous"
+		></script>
+		<title>Newsfeed</title>
+	</head>
+	<body>
+		<div id="wrapper">
+			<h4>Newsfeed</h4>
+			<!-- CREATE POST SECTION -->
+			<div id="wrapAddItem">
+				<!-- Compose = Ava + Input -->
+				<div
+					id="compose"
+					style="border-bottom: none"
+				>
+					<div id="ava">
+						<img
+							id="ava-img"
+							src="Coursera.png"
+							alt="Avatar"
+						/>
+					</div>
+					<div id="input-div">
+						<span id="ava-name">@tmtri3102</span>
+						<textarea
+							name="compose-input"
+							id="post"
+							placeholder="What's on your mind?"
+							oninput="composeInput()"
+						></textarea>
+					</div>
+				</div>
+				<!-- Post = Char count + Button -->
+				<div id="postBtn">
+					<button onclick="postBtn()">Post</button>
+				</div>
+			</div>
+
+			<!-- NEWSFEED SECTION -->
+			<br />
+			<div id="itemList">
+				<!-- <div id="compose">
+					<div id="ava">
+						<img
+							id="ava-img"
+							src="Coursera.png"
+							alt="Avatar"
+						/>
+					</div>
+					<div id="input-div">
+						<span id="ava-name">@tmtri3102</span>
+						<div id="post">${arrItems[i]}</div>
+						<div id="interaction">
+							<div id="intEach">
+								<i
+									id="heart"
+									class="fa-regular fa-heart"
+									onclick="likeRow()"
+								></i>
+								<span id="likeNum"></span>
+							</div>
+							<div id="edit-del">
+								<div id="intEach">
+									<i
+										id="editRow"
+										class="fa-regular fa-pen-to-square"
+										onclick="editRow()"
+									></i>
+								</div>
+								<div id="intEach">
+									<i
+										id="deleteRow"
+										class="fa-solid fa-trash"
+										onclick="deleteRow()"
+									></i>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div> -->
+			</div>
+		</div>
+		<script src="main.js"></script>
+	</body>
+</html>
