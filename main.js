@@ -49,7 +49,7 @@ function display() {
 					</div>
 					<div id="input-div">
 						<span id="ava-name">@tmtri3102</span>
-						<div id="post">${arrItems[i]}</div>
+						<div id="post" class="break">${arrItems[i]}</div>
 						<div id="interaction">
 							<div id="intEach" class="like-btn" onclick="likeBtn(${i})">
 								<i

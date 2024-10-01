@@ -88,6 +88,9 @@ button {
 }
 
 /****** NEWSFEED SECTION ******/
+.break {
+	word-break: break-all;
+}
 
 #itemList {
 	display: flex;
