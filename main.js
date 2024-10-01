@@ -1,19 +1,19 @@
 let arrItems = [];
+let itemAdd = document.getElementById("post");
 
-// CREATE POST SECTION //
+// CREATE POST FUNCTIONS //
 function composeInput() {
 	let textarea = document.getElementById("post");
 	textarea.style.height = "auto";
-	textarea.style.height = `${textarea.scrollHeight}px`;
+	textarea.style.height = `${textarea.scrollHeight}px`; // tự động xuống dòng
 }
 
 function postBtn() {
-	let itemAdd = document.getElementById("post").value;
-	arrItems.push(itemAdd);
+	arrItems.push(itemAdd.value);
 	display();
 }
 
-// NEWSFEED SECTION //
+// NEWSFEED FUNCTIONS //
 
 function display() {
 	let row = "";
@@ -58,6 +58,7 @@ function display() {
 			`;
 	}
 	document.getElementById("itemList").innerHTML = row;
+	itemAdd.value = "";
 }
 
 function likeBtn(index) {
