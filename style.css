@@ -10,7 +10,7 @@ body {
 	text-align: center;
 }
 
-/* CREATE POST SECTION */
+/****** CREATE POST SECTION ******/
 #wrapAddItem {
 	display: flex;
 	flex-direction: column;
@@ -86,7 +86,8 @@ button {
 	max-width: 60px;
 }
 
-/* NEWSFEED SECTION */
+/****** NEWSFEED SECTION ******/
+
 #itemList {
 	display: flex;
 	flex-direction: column;

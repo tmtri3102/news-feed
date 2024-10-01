@@ -12,3 +12,10 @@ Tech stack: HTML, CSS, Javascript
 Icon pack: Font Awesome
 Thời gian: 30/9 - 1/10
 <br>
+
+## Tính năng:
+
+- Đăng bài viết
+- Chỉnh sửa bài viết
+- Like bài viết
+- Xoá bài viết

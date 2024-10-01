@@ -10,17 +10,26 @@
 			rel="stylesheet"
 			href="style.css"
 		/>
-		<!-- ICON PACK -->
+		<!-- ICON -->
 		<script
 			src="https://kit.fontawesome.com/d9192ce5f6.js"
 			crossorigin="anonymous"
 		></script>
 		<title>Newsfeed</title>
 	</head>
-	<body>
+	<body onload="display()">
 		<div id="wrapper">
-			<h4>Newsfeed</h4>
-			<!-- CREATE POST SECTION -->
+			<h3>
+				Newsfeed
+				<span onclick="resetFeed()"
+					><i
+						style="font-size: 14px"
+						class="fa-solid fa-rotate"
+					></i
+				></span>
+			</h3>
+
+			<!------- CREATE POST SECTION ------->
 			<div id="wrapAddItem">
 				<!-- Compose = Ava + Input -->
 				<div
@@ -30,7 +39,7 @@
 					<div id="ava">
 						<img
 							id="ava-img"
-							src="Coursera.png"
+							src="profile-ava.png"
 							alt="Avatar"
 						/>
 					</div>
@@ -40,24 +49,25 @@
 							name="compose-input"
 							id="post"
 							placeholder="What's on your mind?"
-							oninput="composeInput()"
+							oninput="lineBreak()"
 						></textarea>
 					</div>
 				</div>
-				<!-- Post = Char count + Button -->
+				<!-- Post button -->
 				<div id="postBtn">
 					<button onclick="postBtn()">Post</button>
 				</div>
 			</div>
 
-			<!-- NEWSFEED SECTION -->
+			<!------- NEWSFEED SECTION ------->
 			<br />
 			<div id="itemList">
-				<!-- <div id="compose">
+				<!-- Sample newsfeed - uncomment to show
+				<div id="compose">
 					<div id="ava">
 						<img
 							id="ava-img"
-							src="Coursera.png"
+							src="profile-ava.png"
 							alt="Avatar"
 						/>
 					</div>
@@ -71,7 +81,7 @@
 									class="fa-regular fa-heart"
 									onclick="likeRow()"
 								></i>
-								<span id="likeNum"></span>
+								<span id="likeCount"></span>
 							</div>
 							<div id="edit-del">
 								<div id="intEach">
