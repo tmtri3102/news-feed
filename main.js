@@ -132,6 +132,7 @@ function resetFeed() {
 	);
 	if (confirmReset) {
 		arrItems = [];
+		arrLikes = [];
 		updateStorage();
 		display();
 	} else {
