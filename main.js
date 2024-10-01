@@ -20,6 +20,7 @@ function postBtn() {
 }
 
 function updateStorage() {
+	localStorage.setItem("arrLikes", arrLikes);
 	localStorage.setItem("arrItems", JSON.stringify(arrItems)); // key là "arrItems", value là array chứa các post dạng string
 }
 
@@ -118,6 +119,7 @@ function deleteBtn(index) {
 
 	if (confirmDel) {
 		arrItems.splice(index, 1);
+		arrLikes.splice(index, 1);
 		updateStorage();
 		display();
 	} else {
