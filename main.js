@@ -1,62 +1,73 @@
-let arrItems = JSON.parse(localStorage.getItem("arrItems")) || [];
+let arrItems = [];
+if (localStorage.getItem("arrItems")) {
+	arrItems = JSON.parse(localStorage.getItem("arrItems"));
+}
+let arrLikes = [];
+if (localStorage.getItem("arrLikes")) {
+	arrLikes = JSON.parse(localStorage.getItem("arrLikes"));
+}
 
-let arrLikes = JSON.parse(localStorage.getItem("arrLikes")) || [];
+let arrImgs = [];
+if (localStorage.getItem("arrImgs")) {
+	arrImgs = JSON.parse(localStorage.getItem("arrImgs"));
+}
 
 let itemAdd = document.getElementById("post");
 
+// let imgAdd = document.getElementById("myFile").files[0];
+
 // CREATE POST FUNCTIONS //
+
 function lineBreak() {
 	let textarea = document.getElementById("post");
 	textarea.style.height = "auto";
-	textarea.style.height = `${textarea.scrollHeight}px`; // tự động xuống dòng
+	textarea.style.height = `${textarea.scrollHeight}px`; // tự xuống dòng
+}
+
+function insertImg() {
+	let imgAdd = document.getElementById("myFile").files[0];
+	let imgURL = URL.createObjectURL(imgAdd);
+	console.log(imgURL);
+	document.getElementById(
+		"imgAdd"
+	).innerHTML = `<img src="${imgURL}" alt="an image uploaded" />`;
 }
 
 function postBtn() {
 	if (itemAdd.value !== "") {
 		arrItems.push(itemAdd.value);
-		updateStorage();
+		localStorage.setItem("arrItems", JSON.stringify(arrItems));
 		display();
+		itemAdd.value = "";
 	}
-}
-
-function updateStorage() {
-	localStorage.setItem("arrLikes", arrLikes);
-	localStorage.setItem("arrItems", JSON.stringify(arrItems)); // key là "arrItems", value là array chứa các post dạng string
 }
 
 // NEWSFEED FUNCTIONS //
 
-if (arrLikes.length === 0) {
-	for (let i = 0; i < arrItems.length; i++) {
-		arrLikes.push(0);
-	}
-	localStorage.setItem("arrLikes", JSON.stringify(arrLikes));
-}
-
 function display() {
 	let row = "";
+	if (arrItems.length == 0) return;
 	for (let i = 0; i < arrItems.length; i++) {
-		let heartClass = arrLikes[i] === 1 ? "fa-solid" : "fa-regular";
-		let likeNumText = arrLikes[i] === 1 ? "1" : "";
+		let iconClass = arrLikes[i] === 1 ? "fa-solid" : "fa-regular";
 		row += `
 			<div id="compose" >
 					<div id="ava">
 						<img
 							id="ava-img"
-							src="profile-ava.png"
+							src="https://i.pinimg.com/736x/fa/79/8a/fa798a6673e54b7533904680c9a67f79.jpg"
 							alt="Avatar"
 						/>
 					</div>
 					<div id="input-div">
-						<span id="ava-name">@tmtri3102</span>
-						<div id="post" class="break">${arrItems[i]}</div>
+						<span id="ava-name">@username</span>
+						<div id="post" class="post-${i} break">${arrItems[i]}</div>
 						<div id="interaction">
 							<div id="intEach" class="like-btn" onclick="likeBtn(${i})">
 								<i
 									id="heart-${i}"
-									class="${heartClass} fa-heart"
+									class="${arrLikes[i] === 1 ? "fa-solid" : "fa-regular"} fa-heart"
 								></i>
-								<span id="likeCount-${i}">${likeNumText}</span>
+								<span id="likeCount-${i}">${arrLikes[i] === 1 ? "1" : ""}</span>
 							</div>
 							<div id="edit-del">
 								<div id="intEach" onclick="editBtn(${i})">
@@ -79,37 +90,35 @@ function display() {
 	}
 
 	document.getElementById("itemList").innerHTML = row;
-	itemAdd.value = "";
 }
 
 function likeBtn(index) {
-	let heartIcon = document.getElementById(`heart-${index}`); // mỗi nút like 1 index riêng
+	let heartIcon = document.getElementById(`heart-${index}`);
 	let likeCount = document.getElementById(`likeCount-${index}`);
 
 	heartIcon.classList.toggle("fa-regular");
 	heartIcon.classList.toggle("fa-solid");
 
-	if (arrLikes[index] === 1) {
-		arrLikes[index] = 0;
-	} else {
+	if (heartIcon.classList.contains("fa-solid")) {
+		likeCount.textContent = "1";
 		arrLikes[index] = 1;
+	} else {
+		likeCount.textContent = "";
+		arrLikes[index] = 0;
 	}
 
 	localStorage.setItem("arrLikes", JSON.stringify(arrLikes));
-
-	likeCount.textContent = arrLikes[index] === 1 ? "1" : "";
-	// likeCount.textContent = heartIcon.classList.contains("fa-solid") ? "1" : "";
 }
 
 function editBtn(index) {
 	let newPost = prompt("Edit this post:");
 
 	if (newPost == null || newPost == "") {
-		updateStorage();
-		display();
+		return;
 	} else {
 		arrItems[index] = newPost;
-		updateStorage();
+		localStorage.setItem("arrItems", JSON.stringify(arrItems));
+		localStorage.setItem("arrLikes", JSON.stringify(arrLikes));
 		display();
 	}
 }
@@ -120,10 +129,10 @@ function deleteBtn(index) {
 	if (confirmDel) {
 		arrItems.splice(index, 1);
 		arrLikes.splice(index, 1);
-		updateStorage();
+		localStorage.setItem("arrItems", JSON.stringify(arrItems));
 		display();
 	} else {
-		updateStorage();
+		localStorage.setItem("arrItems", JSON.stringify(arrItems));
 		display();
 	}
 }
@@ -133,9 +142,8 @@ function resetFeed() {
 		"Are you sure want to reset? \nThis will delete the newsfeed."
 	);
 	if (confirmReset) {
-		arrItems = [];
-		arrLikes = [];
-		updateStorage();
+		localStorage.clear();
+		location.reload();
 		display();
 	} else {
 		display();

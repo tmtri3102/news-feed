@@ -70,9 +70,16 @@ body {
 	overflow-y: hidden;
 	text-align: left;
 }
+#imgAdd {
+	display: flex;
+}
+#imgAdd img {
+	width: 80px;
+}
 #postBtn {
 	display: flex;
 	justify-content: end;
+	gap: 16px;
 }
 
 button {
@@ -85,6 +92,7 @@ button {
 	cursor: pointer;
 	width: 100%;
 	max-width: 60px;
+	font-size: 16px;
 }
 
 /****** NEWSFEED SECTION ******/

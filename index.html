@@ -19,6 +19,7 @@
 	</head>
 	<body onload="display()">
 		<div id="wrapper">
+			<!------- HEADER ------->
 			<h3>
 				Newsfeed
 				<span onclick="resetFeed()"
@@ -31,7 +32,8 @@
 
 			<!------- CREATE POST SECTION ------->
 			<div id="wrapAddItem">
-				<!-- Compose = Ava + Input -->
+				<!-- Compose = Ava + Input   -->
+
 				<div
 					id="compose"
 					style="border-bottom: none"
@@ -39,78 +41,52 @@
 					<div id="ava">
 						<img
 							id="ava-img"
-							src="profile-ava.png"
+							src="https://i.pinimg.com/736x/fa/79/8a/fa798a6673e54b7533904680c9a67f79.jpg"
 							alt="Avatar"
 						/>
 					</div>
 					<div id="input-div">
-						<span
-							><a
+						<span>
+							<a
 								id="ava-name"
 								href="http://github.com/tmtri3102/news-feed"
 								target="_blank"
-								>@tmtri3102</a
-							></span
-						>
+							>
+								@username
+							</a>
+						</span>
 						<textarea
 							name="compose-input"
 							id="post"
 							placeholder="What's on your mind?"
 							oninput="lineBreak()"
 						></textarea>
+						<div id="imgAdd"></div>
 					</div>
 				</div>
 				<!-- Post button -->
+
 				<div id="postBtn">
+					<div id="intEach">
+						<input
+							type="file"
+							id="myFile"
+							name="filename"
+							oninput=" insertImg()"
+							hidden
+						/>
+						<label for="myFile"><i class="fa-regular fa-image"></i></label>
+					</div>
+
 					<button onclick="postBtn()">Post</button>
 				</div>
 			</div>
 
 			<!------- NEWSFEED SECTION ------->
 			<br />
-			<div id="itemList">
-				<!-- Sample newsfeed - uncomment to show
-				<div id="compose">
-					<div id="ava">
-						<img
-							id="ava-img"
-							src="profile-ava.png"
-							alt="Avatar"
-						/>
-					</div>
-					<div id="input-div">
-						<span id="ava-name">@tmtri3102</span>
-						<div id="post">${arrItems[i]}</div>
-						<div id="interaction">
-							<div id="intEach">
-								<i
-									id="heart"
-									class="fa-regular fa-heart"
-									onclick="likeRow()"
-								></i>
-								<span id="likeCount"></span>
-							</div>
-							<div id="edit-del">
-								<div id="intEach">
-									<i
-										id="editRow"
-										class="fa-regular fa-pen-to-square"
-										onclick="editRow()"
-									></i>
-								</div>
-								<div id="intEach">
-									<i
-										id="deleteRow"
-										class="fa-solid fa-trash"
-										onclick="deleteRow()"
-									></i>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div> -->
-			</div>
+			<div id="itemList"></div>
 		</div>
+
 		<script src="main.js"></script>
 	</body>
 </html>

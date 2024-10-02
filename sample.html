@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		/>
+		<link
+			rel="stylesheet"
+			href="style.css"
+		/>
+		<script
+			src="https://kit.fontawesome.com/d9192ce5f6.js"
+			crossorigin="anonymous"
+		></script>
+		<title>Newsfeed</title>
+	</head>
+	<body onload="display()">
+		<div id="wrapper">
+			<h3>
+				Newsfeed
+				<span onclick="resetFeed()">
+					<i
+						style="font-size: 14px"
+						class="fa-solid fa-rotate"
+					></i>
+				</span>
+			</h3>
+
+			<!------- CREATE POST SECTION ------->
+			<div id="wrapAddItem">
+				<div
+					id="compose"
+					style="border-bottom: none"
+				>
+					<div id="ava">
+						<img
+							id="ava-img"
+							src="https://i.pinimg.com/736x/fa/79/8a/fa798a6673e54b7533904680c9a67f79.jpg"
+							alt="Avatar"
+						/>
+					</div>
+					<div id="input-div">
+						<span
+							><a
+								id="ava-name"
+								href="#"
+								target="_blank"
+								>@tmtri3102</a
+							></span
+						>
+						<textarea
+							name="compose-input"
+							id="post"
+							placeholder="What's on your mind?"
+							oninput="lineBreak()"
+						></textarea>
+					</div>
+				</div>
+				<div id="postBtn">
+					<button onclick="postBtn()">Post</button>
+				</div>
+			</div>
+			<br />
+			<!------- NEWSFEED SECTION ------->
+			<div id="itemList"></div>
+		</div>
+
+		<script>
+			let arrItems = JSON.parse(localStorage.getItem("arrItems")) || [];
+			let arrLikes = JSON.parse(localStorage.getItem("arrLikes")) || []; // Lưu like / post
+			let arrComments = JSON.parse(localStorage.getItem("arrComments")) || []; // Lưu comment / post
+
+			let itemAdd = document.getElementById("post");
+
+			function lineBreak() {
+				let textarea = document.getElementById("post");
+				textarea.style.height = "auto";
+				textarea.style.height = `${textarea.scrollHeight}px`;
+			}
+
+			function postBtn() {
+				if (itemAdd.value !== "") {
+					arrItems.push(itemAdd.value);
+					arrComments.push([]); // Create a new comment array for the post
+					updateStorage();
+					display();
+				}
+			}
+
+			function updateStorage() {
+				localStorage.setItem("arrItems", JSON.stringify(arrItems));
+				localStorage.setItem("arrLikes", JSON.stringify(arrLikes));
+				localStorage.setItem("arrComments", JSON.stringify(arrComments)); // Store comments
+			}
+
+			function display() {
+				let row = "";
+				for (let i = 0; i < arrItems.length; i++) {
+					let heartClass = arrLikes[i] === 1 ? "fa-solid" : "fa-regular";
+					let likeNumText = arrLikes[i] === 1 ? "1" : "";
+
+					row += `
+					<div id="compose">
+						<div id="ava">
+							<img id="ava-img" src="https://i.pinimg.com/736x/fa/79/8a/fa798a6673e54b7533904680c9a67f79.jpg" alt="Avatar" />
+						</div>
+						<div id="input-div">
+							<span id="ava-name">@tmtri3102</span>
+							<div id="post" class="break">${arrItems[i]}</div>
+							<div id="interaction">
+								<div id="intEach" class="like-btn" onclick="likeBtn(${i})">
+									<i id="heart-${i}" class="${heartClass} fa-heart"></i>
+									<span id="likeCount-${i}">${likeNumText}</span>
+								</div>
+								<div id="edit-del">
+									<div id="intEach" onclick="addComment(${i})">
+										<i id="commentRow" class="fa-regular fa-comment"></i> Comment
+									</div>
+									<div id="intEach" onclick="editBtn(${i})">
+										<i id="editRow" class="fa-regular fa-pen-to-square"></i>
+									</div>
+									<div id="intEach" onclick="deleteBtn(${i})">
+										<i id="deleteRow" class="fa-solid fa-trash"></i>
+									</div>
+								</div>
+							</div>
+							<div class="comments" id="comments-${i}">
+								${arrComments[i].map((comment) => formatComment(comment)).join("")}
+							</div>
+						</div>
+					</div>
+					`;
+				}
+
+				document.getElementById("itemList").innerHTML = row;
+				itemAdd.value = "";
+			}
+
+			// Format comment display with avatars and vertical connector
+			function formatComment(comment) {
+				return `
+					<div style="display: flex; align-items: center; margin: 10px 0;">
+						<div style="width: 2px; height: 50px; background: #ddd; margin-right: 10px;"></div>
+						<div style="display: flex; align-items: center;">
+							<div style="width: 30px; height: 30px; background: #555; border-radius: 50%; color: white; display: flex; justify-content: center; align-items: center; margin-right: 10px;">
+								${comment.username[0].toUpperCase()}
+							</div>
+							<div><strong>${comment.username}</strong>: ${comment.text}</div>
+						</div>
+					</div>
+				`;
+			}
+
+			function addComment(postIndex) {
+				let username = prompt("Enter your username:", "@tmtri3102");
+				let commentText = prompt("Enter your comment:");
+				if (username && commentText) {
+					arrComments[postIndex].push({ username, text: commentText });
+					updateStorage();
+					display();
+				}
+			}
+
+			function likeBtn(index) {
+				let heartIcon = document.getElementById(`heart-${index}`);
+				let likeCount = document.getElementById(`likeCount-${index}`);
+				heartIcon.classList.toggle("fa-regular");
+				heartIcon.classList.toggle("fa-solid");
+				arrLikes[index] = arrLikes[index] === 1 ? 0 : 1;
+				localStorage.setItem("arrLikes", JSON.stringify(arrLikes));
+				likeCount.textContent = arrLikes[index] === 1 ? "1" : "";
+			}
+
+			function editBtn(index) {
+				let newPost = prompt("Edit this post:");
+				if (newPost != null && newPost !== "") {
+					arrItems[index] = newPost;
+					updateStorage();
+					display();
+				}
+			}
+
+			function deleteBtn(index) {
+				if (confirm("Are you sure want to delete this post?")) {
+					arrItems.splice(index, 1);
+					arrLikes.splice(index, 1);
+					arrComments.splice(index, 1); // Remove comments for the deleted post
+					updateStorage();
+					display();
+				}
+			}
+
+			function resetFeed() {
+				if (
+					confirm(
+						"Are you sure want to reset? \nThis will delete the newsfeed."
+					)
+				) {
+					arrItems = [];
+					arrLikes = [];
+					arrComments = [];
+					updateStorage();
+					display();
+				}
+			}
+		</script>
+	</body>
+</html>
