@@ -13,6 +13,8 @@ if (localStorage.getItem("arrImgs")) {
 }
 
 let itemAdd = document.getElementById("post");
+let img = document.getElementById("myFile");
+let imgAdd = document.getElementById("imgAdd");
 
 // let imgAdd = document.getElementById("myFile").files[0];
 
@@ -25,20 +27,22 @@ function lineBreak() {
 }
 
 function insertImg() {
-	let imgAdd = document.getElementById("myFile").files[0];
-	let imgURL = URL.createObjectURL(imgAdd);
+	let imgURL = URL.createObjectURL(img.files[0]);
 	console.log(imgURL);
-	document.getElementById(
-		"imgAdd"
-	).innerHTML = `<img src="${imgURL}" alt="an image uploaded" />`;
+	imgAdd.innerHTML = `<img src="${imgURL}" alt="an image uploaded" />`;
 }
 
 function postBtn() {
 	if (itemAdd.value !== "") {
 		arrItems.push(itemAdd.value);
 		localStorage.setItem("arrItems", JSON.stringify(arrItems));
+		if (imgAdd.innerHTML) {
+			arrImgs.push(imgAdd.innerHTML);
+			localStorage.setItem("arrImgs", JSON.stringify(arrImgs));
+		}
 		display();
 		itemAdd.value = "";
+		imgAdd.innerHTML = "";
 	}
 }
 
@@ -46,7 +50,10 @@ function postBtn() {
 
 function display() {
 	let row = "";
-	if (arrItems.length == 0) return;
+	if (arrItems.length == 0) {
+		document.getElementById("itemList").innerHTML = "";
+		return;
+	}
 	for (let i = 0; i < arrItems.length; i++) {
 		let iconClass = arrLikes[i] === 1 ? "fa-solid" : "fa-regular";
 		row += `
@@ -61,6 +68,7 @@ function display() {
 					<div id="input-div">
 						<span id="ava-name">@username</span>
 						<div id="post" class="post-${i} break">${arrItems[i]}</div>
+						<div id="imgAdd"></div>
 						<div id="interaction">
 							<div id="intEach" class="like-btn" onclick="likeBtn(${i})">
 								<i
@@ -129,10 +137,9 @@ function deleteBtn(index) {
 	if (confirmDel) {
 		arrItems.splice(index, 1);
 		arrLikes.splice(index, 1);
+
 		localStorage.setItem("arrItems", JSON.stringify(arrItems));
-		display();
-	} else {
-		localStorage.setItem("arrItems", JSON.stringify(arrItems));
+		localStorage.setItem("arrLikes", JSON.stringify(arrLikes));
 		display();
 	}
 }
