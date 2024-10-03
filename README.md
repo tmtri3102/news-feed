@@ -13,23 +13,23 @@ Module 01 case study
 
 ##### Create post
 
-![](https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExaXlpaWgzMGs3bnNtbDYzaDdjM2p3ZWd6enNxNjNwZmJhZzVpbmlocCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Oo9IvZFhicDNWKZebt/giphy.gif)
+<img src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExaXlpaWgzMGs3bnNtbDYzaDdjM2p3ZWd6enNxNjNwZmJhZzVpbmlocCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Oo9IvZFhicDNWKZebt/giphy.gif" width="100%">
 
 ##### Edit post
 
-![](https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExdWhqcWpqZ3AzejdxcTZvNmlocXFvcDF0dXdzZjNhYXloeXV2YWI1diZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Rvh2Tmad85EgLtUmjD/giphy.gif)
+<img src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExdWhqcWpqZ3AzejdxcTZvNmlocXFvcDF0dXdzZjNhYXloeXV2YWI1diZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Rvh2Tmad85EgLtUmjD/giphy.gif" width="100%">
 
 ##### Like post
 
-![](https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjk2Z2tsaDMzeHh6eng4d2U2bGpmd3VuODhnbHJnM3VlcnhiajZnaCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/vd2iktiqmsdWLNya99/giphy.gif)
+<img src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjk2Z2tsaDMzeHh6eng4d2U2bGpmd3VuODhnbHJnM3VlcnhiajZnaCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/vd2iktiqmsdWLNya99/giphy.gif" width="100%">
 
 ##### Delete post
 
-![](https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExMTk0M2Y3ZmNhZWQ2Nzh3b3kwNzBtajZlMXRzYjB3Z29vd3pxbnVobSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ZV8sMIUCqI3wgv0keI/giphy.gif)
+<img src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExMTk0M2Y3ZmNhZWQ2Nzh3b3kwNzBtajZlMXRzYjB3Z29vd3pxbnVobSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ZV8sMIUCqI3wgv0keI/giphy.gif" width="100%">
 
 ##### Reset newsfeed
 
-![](https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExeTMza2NyMG96ZjYzdWJsYTh3bjB3dHc4anl0bGR0dHN1dTF1dzcxdiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Q515HLeItnmXVVccMD/giphy.gif)
+<img src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExeTMza2NyMG96ZjYzdWJsYTh3bjB3dHc4anl0bGR0dHN1dTF1dzcxdiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Q515HLeItnmXVVccMD/giphy.gif" width="100%">
 
 ### Slide
 
