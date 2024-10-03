@@ -19,7 +19,7 @@
 	</head>
 	<body onload="display()">
 		<div id="wrapper">
-			<!------- HEADER ------->
+			<!------------- HEADER & RESET ------------->
 			<h3>
 				Newsfeed
 				<span onclick="resetFeed()"
@@ -30,14 +30,13 @@
 				></span>
 			</h3>
 
-			<!------- CREATE POST SECTION ------->
+			<!------------- CREATE POST ------------->
 			<div id="wrapAddItem">
-				<!-- Compose = Ava + Input   -->
-
 				<div
 					id="compose"
 					style="border-bottom: none"
 				>
+					<!-- Left: Ava || Right: Username-Input -->
 					<div id="ava">
 						<img
 							id="ava-img"
@@ -45,6 +44,7 @@
 							alt="Avatar"
 						/>
 					</div>
+
 					<div id="input-div">
 						<span>
 							<a
@@ -55,34 +55,38 @@
 								@username
 							</a>
 						</span>
+
 						<textarea
 							name="compose-input"
 							id="post"
 							placeholder="What's on your mind?"
 							oninput="lineBreak()"
 						></textarea>
+
 						<div id="imgAdd"></div>
 					</div>
 				</div>
-				<!-- Post button -->
 
 				<div id="postBtn">
-					<div id="intEach">
+					<!-- Image feature (coming soon):  -->
+					<!--<div id="intEach">
 						<input
 							type="file"
 							id="myFile"
 							name="filename"
+							accept=".jpg, .jpeg, .png"
 							oninput="insertImg()"
 							hidden
 						/>
 						<label for="myFile"><i class="fa-regular fa-image"></i></label>
 					</div>
+					 -->
 
 					<button onclick="postBtn()">Post</button>
 				</div>
 			</div>
 
-			<!------- NEWSFEED SECTION ------->
+			<!------------- DISPLAY NEWSFEED ------------->
 			<br />
 			<div id="itemList"></div>
 		</div>

@@ -7,18 +7,18 @@ if (localStorage.getItem("arrLikes")) {
 	arrLikes = JSON.parse(localStorage.getItem("arrLikes"));
 }
 
-let arrImgs = [];
-if (localStorage.getItem("arrImgs")) {
-	arrImgs = JSON.parse(localStorage.getItem("arrImgs"));
-}
-
 let itemAdd = document.getElementById("post");
-let img = document.getElementById("myFile");
-let imgAdd = document.getElementById("imgAdd");
 
-// let imgAdd = document.getElementById("myFile").files[0];
+//  Image Feature (coming soon):
 
-// CREATE POST FUNCTIONS //
+// let arrImgs = [];
+// if (localStorage.getItem("arrImgs")) {
+// 	arrImgs = JSON.parse(localStorage.getItem("arrImgs"));
+// }
+// let img = document.getElementById("myFile");
+// let imgAdd = document.getElementById("imgAdd");
+
+//-------- CREATE POST  --------//
 
 function lineBreak() {
 	let textarea = document.getElementById("post");
@@ -26,27 +26,38 @@ function lineBreak() {
 	textarea.style.height = `${textarea.scrollHeight}px`; // tự xuống dòng
 }
 
-function insertImg() {
-	let imgURL = URL.createObjectURL(img.files[0]);
-	console.log(imgURL);
-	imgAdd.innerHTML = `<img src="${imgURL}" alt="an image uploaded" />`;
-}
+// Image Feature (coming soon):
+
+// function insertImg() {
+// 	let imgURL = URL.createObjectURL(img.files[0]);
+// 	imgAdd.innerHTML = `
+// 		<img src="${imgURL}">
+// 		<i class="fa-solid fa-circle-xmark" onclick="removeImg()"></i>
+// 	`;
+// }
+
+// function removeImg() {
+// 	imgAdd.innerHTML = "";
+// }
 
 function postBtn() {
 	if (itemAdd.value !== "") {
 		arrItems.push(itemAdd.value);
 		localStorage.setItem("arrItems", JSON.stringify(arrItems));
-		if (imgAdd.innerHTML) {
-			arrImgs.push(imgAdd.innerHTML);
-			localStorage.setItem("arrImgs", JSON.stringify(arrImgs));
-		}
+
+		/* Image Feature (coming soon):
+
+		arrImgs.push(imgAdd.innerHTML);
+		localStorage.setItem("arrImgs", JSON.stringify(arrImgs));
+		*/
+
 		display();
 		itemAdd.value = "";
-		imgAdd.innerHTML = "";
+		// imgAdd.innerHTML = "";
 	}
 }
 
-// NEWSFEED FUNCTIONS //
+//-------------- DISPLAY NEWSFEED --------------//
 
 function display() {
 	let row = "";
@@ -55,7 +66,6 @@ function display() {
 		return;
 	}
 	for (let i = 0; i < arrItems.length; i++) {
-		let iconClass = arrLikes[i] === 1 ? "fa-solid" : "fa-regular";
 		row += `
 			<div id="compose" >
 					<div id="ava">
@@ -67,29 +77,43 @@ function display() {
 					</div>
 					<div id="input-div">
 						<span id="ava-name">@username</span>
+
+						<!-------------  Post ------------->
+
 						<div id="post" class="post-${i} break">${arrItems[i]}</div>
-						<div id="imgAdd"></div>
+
+						<!-- Image feature (coming soon): <div id="imgAdd">{arrImgs[i]}</div> -->
+
 						<div id="interaction">
+						
+							<!-------------  Like button ------------->
+
 							<div id="intEach" class="like-btn" onclick="likeBtn(${i})">
 								<i
 									id="heart-${i}"
 									class="${arrLikes[i] === 1 ? "fa-solid" : "fa-regular"} fa-heart"
 								></i>
+
 								<span id="likeCount-${i}">${arrLikes[i] === 1 ? "1" : ""}</span>
 							</div>
-							<div id="edit-del">
+							
+							<!----------- Edit & Delete button ----------->
+
+							<div id="edit-del" class="edit-del-${i}">
 								<div id="intEach" onclick="editBtn(${i})">
 									<i
 										id="editRow"
 										class="fa-regular fa-pen-to-square"
 									></i>
 								</div>
+								
 								<div id="intEach" onclick="deleteBtn(${i})">
 									<i
 										id="deleteRow"
 										class="fa-solid fa-trash"
 									></i>
 								</div>
+
 							</div>
 						</div>
 					</div>
@@ -99,6 +123,8 @@ function display() {
 
 	document.getElementById("itemList").innerHTML = row;
 }
+
+//-------- INTERACTIONS: Likes, Edit, Delete, Reset --------//
 
 function likeBtn(index) {
 	let heartIcon = document.getElementById(`heart-${index}`);
@@ -119,16 +145,38 @@ function likeBtn(index) {
 }
 
 function editBtn(index) {
-	let newPost = prompt("Edit this post:");
+	let postElement = document.querySelector(`.post-${index}`);
+	let currentText = postElement.innerText;
+	let editDelElement = document.querySelector(`.edit-del-${index}`);
 
-	if (newPost == null || newPost == "") {
-		return;
-	} else {
-		arrItems[index] = newPost;
-		localStorage.setItem("arrItems", JSON.stringify(arrItems));
-		localStorage.setItem("arrLikes", JSON.stringify(arrLikes));
-		display();
-	}
+	postElement.innerHTML = `
+			<textarea 
+				id="post" 
+				class="edit-textarea-${index}" 
+				oninput="lineBreak()"
+			>${currentText}</textarea>
+			
+	`;
+
+	editDelElement.innerHTML = `
+			<div id="intEach" onclick="saveEdit(${index})">
+				Save
+			</div>
+			<div id="intEach" onclick="cancelEdit()">
+				Cancel
+			</div>
+	`;
+}
+
+function saveEdit(index) {
+	let editedText = document.querySelector(`.edit-textarea-${index}`).value;
+	arrItems[index] = editedText;
+	localStorage.setItem("arrItems", JSON.stringify(arrItems));
+	display();
+}
+
+function cancelEdit() {
+	display();
 }
 
 function deleteBtn(index) {
